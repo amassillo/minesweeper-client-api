@@ -5,7 +5,8 @@ var BoardController = require('../service/BoardControllerService');
 
 module.exports.getBoardUsingGET = function getBoardUsingGET (req, res, next) {
   var boardId = req.swagger.params['boardId'].value;
-  BoardController.getBoardUsingGET(boardId)
+  var userId = req.swagger.params['userId'].value;
+  BoardController.getBoardUsingGET(boardId,userId)
     .then(function (response) {
       utils.writeJson(res, response);
     })

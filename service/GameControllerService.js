@@ -7,10 +7,10 @@
  * boardId Long boardId
  * col Integer col
  * row Integer row
- * user_id Long user_id
+ * userId Long userId (optional)
  * returns ResponseDTO
  **/
-exports.clickCellUsingPOST = function(boardId,col,row,user_id) {
+exports.clickCellUsingPOST = function(boardId,col,row,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     if (Object.keys(examples).length > 0) {
@@ -29,10 +29,10 @@ exports.clickCellUsingPOST = function(boardId,col,row,user_id) {
  * col Integer col
  * flag String flag
  * row Integer row
- * user_id Long user_id
+ * userId Long userId (optional)
  * returns ResponseDTO
  **/
-exports.flagCellUsingPOST = function(boardId,col,flag,row,user_id) {
+exports.flagCellUsingPOST = function(boardId,col,flag,row,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     if (Object.keys(examples).length > 0) {
@@ -50,9 +50,10 @@ exports.flagCellUsingPOST = function(boardId,col,flag,row,user_id) {
  * boardId Long boardId
  * col Integer col
  * row Integer row
+ * userId Long userId (optional)
  * returns ResponseDTO
  **/
-exports.unflagCellUsingPOST = function(boardId,col,row) {
+exports.unflagCellUsingPOST = function(boardId,col,row,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     if (Object.keys(examples).length > 0) {

@@ -5,9 +5,10 @@
  * getBoard
  *
  * boardId Long boardId
+ * userId Long userId (optional)
  * returns ResponseDTO
  **/
-exports.getBoardUsingGET = function(boardId) {
+exports.getBoardUsingGET = function(boardId,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     if (Object.keys(examples).length > 0) {
