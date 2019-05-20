@@ -1,0 +1,404 @@
+---
+swagger: "2.0"
+info:
+  description: "Api Documentation"
+  version: "1.0"
+  title: "Api Documentation"
+  termsOfService: "urn:tos"
+  contact: {}
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0"
+host: "localhost:8080"
+basePath: "/"
+tags:
+- name: "board-controller"
+  description: "Board Controller"
+- name: "game-controller"
+  description: "Game Controller"
+- name: "user-controller"
+  description: "User Controller"
+paths:
+  /board/:
+    get:
+      tags:
+      - "board-controller"
+      summary: "getBoards"
+      operationId: "getBoardsUsingGET"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "user_id"
+        in: "query"
+        description: "user_id"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResponseDTO"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+      deprecated: false
+      x-swagger-router-controller: "BoardController"
+    post:
+      tags:
+      - "board-controller"
+      summary: "newBoard"
+      operationId: "newBoardUsingPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "cols"
+        in: "query"
+        description: "cols"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "mines"
+        in: "query"
+        description: "mines"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "rows"
+        in: "query"
+        description: "rows"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "userId"
+        in: "query"
+        description: "userId"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResponseDTO"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+      deprecated: false
+      x-swagger-router-controller: "BoardController"
+  /board/{boardId}:
+    get:
+      tags:
+      - "board-controller"
+      summary: "getBoard"
+      operationId: "getBoardUsingGET"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "boardId"
+        in: "path"
+        description: "boardId"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResponseDTO"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+      deprecated: false
+      x-swagger-router-controller: "BoardController"
+  /board/{boardId}/pause:
+    post:
+      tags:
+      - "board-controller"
+      summary: "pauseBoard"
+      operationId: "pauseBoardUsingPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "boardId"
+        in: "path"
+        description: "boardId"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "userId"
+        in: "query"
+        description: "userId"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResponseIdsDTO"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+      deprecated: false
+      x-swagger-router-controller: "BoardController"
+  /board/{boardId}/resume:
+    post:
+      tags:
+      - "board-controller"
+      summary: "resumeBoard"
+      operationId: "resumeBoardUsingPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "boardId"
+        in: "path"
+        description: "boardId"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "userId"
+        in: "query"
+        description: "userId"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResponseIdsDTO"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+      deprecated: false
+      x-swagger-router-controller: "BoardController"
+  /play/{boardId}/click:
+    post:
+      tags:
+      - "game-controller"
+      summary: "clickCell"
+      operationId: "clickCellUsingPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "boardId"
+        in: "path"
+        description: "boardId"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "col"
+        in: "query"
+        description: "col"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "row"
+        in: "query"
+        description: "row"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "user_id"
+        in: "query"
+        description: "user_id"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResponseDTO"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+      deprecated: false
+      x-swagger-router-controller: "GameController"
+  /play/{boardId}/flag:
+    post:
+      tags:
+      - "game-controller"
+      summary: "flagCell"
+      operationId: "flagCellUsingPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "boardId"
+        in: "path"
+        description: "boardId"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "col"
+        in: "query"
+        description: "col"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "flag"
+        in: "query"
+        description: "flag"
+        required: true
+        type: "string"
+      - name: "row"
+        in: "query"
+        description: "row"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "user_id"
+        in: "query"
+        description: "user_id"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResponseDTO"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+      deprecated: false
+      x-swagger-router-controller: "GameController"
+  /play/{boardId}/unflag:
+    post:
+      tags:
+      - "game-controller"
+      summary: "unflagCell"
+      operationId: "unflagCellUsingPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "boardId"
+        in: "path"
+        description: "boardId"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "col"
+        in: "query"
+        description: "col"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "row"
+        in: "query"
+        description: "row"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResponseDTO"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+      deprecated: false
+      x-swagger-router-controller: "GameController"
+  /user/:
+    post:
+      tags:
+      - "user-controller"
+      summary: "createUser"
+      operationId: "createUserUsingPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "uname"
+        in: "query"
+        description: "uname"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResponseDTO"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+      deprecated: false
+      x-swagger-router-controller: "UserController"
+definitions:
+  ResponseDTO:
+    type: "object"
+    properties:
+      messages:
+        type: "array"
+        items:
+          type: "string"
+    title: "ResponseDTO"
+  ResponseIdsDTO:
+    type: "object"
+    properties:
+      boardIds:
+        type: "array"
+        items:
+          type: "integer"
+          format: "int64"
+      messages:
+        type: "array"
+        items:
+          type: "string"
+    title: "ResponseIdsDTO"
